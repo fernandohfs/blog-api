@@ -1,3 +1,6 @@
+import dotEnv from "dotenv";
+dotEnv.config();
+
 import Hapi from "@hapi/hapi";
 import HapiRouter from "hapi-router";
 import HapiSequelize from "hapi-sequelizejs";
@@ -8,8 +11,8 @@ import dbConfig from "./database";
 class Server {
   constructor() {
     this.server = Hapi.server({
-      host: "localhost",
-      port: 3333
+      host: process.env.HOST,
+      port: process.env.PORT
     });
   }
 
