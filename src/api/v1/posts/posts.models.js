@@ -11,5 +11,9 @@ export default (sequelize, dataTypes) => {
     { sequelize, modelName: "Post" }
   );
 
+  Post.associate = models => {
+    models.Post.hasMany(models.Tag, { as: "tags" });
+  };
+
   return Post;
 };
