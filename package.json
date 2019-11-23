@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@hapi/hapi": "^18.4.0",
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "hapi-router": "5"
   },
   "devDependencies": {
     "nodemon": "^2.0.1"
