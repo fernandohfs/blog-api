@@ -14,4 +14,10 @@ export default new (class PostsDao {
   async findById(id) {
     return await Post.findByPk(id);
   }
+
+  async update(post, id) {
+    await Post.update(post, { where: { id } });
+
+    return await this.findById(id);
+  }
 })();

@@ -15,5 +15,10 @@ export default [
     method: "GET",
     path: "/v1/posts/{id}",
     handler: PostsController.detail
+  },
+  {
+    method: "PUT",
+    path: "/v1/posts/{id}",
+    handler: PostsController.update
   }
 ];
