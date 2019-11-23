@@ -1,5 +1,9 @@
 import Hapi from "@hapi/hapi";
 import HapiRouter from "hapi-router";
+import HapiSequelize from "hapi-sequelizejs";
+import { Sequelize } from "sequelize";
+
+import dbConfig from "./database";
 
 class Server {
   constructor() {
@@ -17,6 +21,17 @@ class Server {
 
   async _plugins() {
     await this.server.register([
+      {
+        plugin: HapiSequelize,
+        options: [
+          {
+            name: "blog",
+            models: ["src/api/**/**/**.models.js"],
+            sequelize: new Sequelize(dbConfig),
+            sync: true
+          }
+        ]
+      },
       {
         plugin: HapiRouter,
         options: {
