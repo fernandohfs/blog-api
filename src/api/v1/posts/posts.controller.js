@@ -1,4 +1,4 @@
-import { CREATED, NOT_FOUND } from "http-status";
+import { CREATED, NO_CONTENT } from "http-status";
 
 import PostsDao from "./posts.dao";
 
@@ -31,5 +31,12 @@ export default new (class PostsController {
     const post = await PostsDao.update(payload, id);
 
     return h.response(post);
+  }
+
+  async destroy(request, h) {
+    const { id } = request.params;
+    await PostsDao.destroy(id);
+
+    return h.response().code(NO_CONTENT);
   }
 })();

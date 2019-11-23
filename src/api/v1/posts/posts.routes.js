@@ -20,5 +20,10 @@ export default [
     method: "PUT",
     path: "/v1/posts/{id}",
     handler: PostsController.update
+  },
+  {
+    method: "DELETE",
+    path: "/v1/posts/{id}",
+    handler: PostsController.destroy
   }
 ];

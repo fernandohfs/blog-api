@@ -20,4 +20,8 @@ export default new (class PostsDao {
 
     return await this.findById(id);
   }
+
+  async destroy(id) {
+    await Post.destroy({ where: { id } });
+  }
 })();
