@@ -1,14 +1,25 @@
+import { CREATED } from "http-status";
+
 import PostsDao from "./posts.dao";
 
 export default new (class PostsController {
   async list(request, h) {
     const posts = await PostsDao.findAll();
+
     return h.response(posts);
+  }
+
+  async store(request, h) {
+    const { payload } = request;
+    const post = await PostsDao.create(payload);
+
+    return h.response(post).code(CREATED);
   }
 
   async detail(request, h) {
     const { id } = request.params;
     const post = await PostsDao.findById(id);
+
     return h.response(post);
   }
 })();

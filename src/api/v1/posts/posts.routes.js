@@ -7,6 +7,11 @@ export default [
     handler: PostsController.list
   },
   {
+    method: "POST",
+    path: "/v1/posts",
+    handler: PostsController.store
+  },
+  {
     method: "GET",
     path: "/v1/posts/{id}",
     handler: PostsController.detail

@@ -7,6 +7,10 @@ export default new (class PostsDao {
     return await Post.findAll();
   }
 
+  async create(post) {
+    return await Post.create(post);
+  }
+
   async findById(id) {
     return await Post.findByPk(id);
   }
