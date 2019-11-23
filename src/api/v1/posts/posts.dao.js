@@ -2,7 +2,7 @@ import { instances } from "hapi-sequelizejs";
 
 const { Post } = instances.getModels();
 
-export default class PostsDao {
+export default new (class PostsDao {
   async findAll() {
     return await Post.findAll();
   }
@@ -10,4 +10,4 @@ export default class PostsDao {
   async findById(id) {
     return await Post.findByPk(id);
   }
-}
+})();
