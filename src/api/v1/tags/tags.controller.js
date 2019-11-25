@@ -36,9 +36,16 @@ export default new (class TagsController {
 
   async update(request, h) {
     const {
-      params: { id },
+      params: { postId, id },
       payload
     } = request;
+
+    const post = await PostsDao.findById(postId);
+
+    if (!post) {
+      return h.response({ message: "Post not found" }).code(NOT_FOUND);
+    }
+
     const tag = await TagsDao.update(payload, id);
 
     return h.response(tag);
