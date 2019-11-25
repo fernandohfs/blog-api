@@ -1,6 +1,7 @@
-import { CREATED, NO_CONTENT } from "http-status";
+import { CREATED, NO_CONTENT, NOT_FOUND } from "http-status";
 
 import TagsDao from "./tags.dao";
+import PostsDao from "../posts/posts.dao";
 
 export default new (class TagsController {
   async list(request, h) {
@@ -14,6 +15,13 @@ export default new (class TagsController {
       params: { postId },
       payload
     } = request;
+
+    const post = await PostsDao.findById(postId);
+
+    if (!post) {
+      return h.response({ message: "Post not found" }).code(NOT_FOUND);
+    }
+
     const tag = await TagsDao.create(postId, payload);
 
     return h.response(tag).code(CREATED);

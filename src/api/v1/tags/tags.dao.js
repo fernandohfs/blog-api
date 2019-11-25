@@ -1,22 +1,21 @@
 import { instances } from "hapi-sequelizejs";
 
-const { Tag, Post } = instances.getModels();
+const { Tag } = instances.getModels();
 
 export default new (class TagsDao {
   async findAll() {
-    return await Tag.findAll();
+    return await Tag.findAll({ attributes: { exclude: ["PostId"] } });
   }
 
-  async create(postId, tag) {
-    const tagx = await Tag.create(tag);
+  async create(postId, payload) {
+    const tag = await Tag.create(payload);
+    tag.setPost(postId);
 
-    tagx.setPost(postId);
-
-    return tagx;
+    return tag;
   }
 
   async findById(id) {
-    return await Tag.findByPk(id);
+    return await Tag.findByPk(id, { attributes: { exclude: ["PostId"] } });
   }
 
   async update(tag, id) {
