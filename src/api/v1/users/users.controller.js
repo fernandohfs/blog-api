@@ -15,7 +15,7 @@ class UsersController {
   async login(request, h) {
     const { payload } = request;
     const user = await authenticate(payload);
-    const token = await getToken({
+    const token = getToken({
       id: user.id,
       email: user.email
     });

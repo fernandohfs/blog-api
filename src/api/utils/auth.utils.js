@@ -5,8 +5,8 @@ import { notFound } from "@hapi/boom";
 
 import { getObjectOr404 } from "../utils/database.utils";
 
-export async function getToken(payload, options = {}) {
-  return await jwt.sign(payload, "stubJWT", {
+export function getToken(payload, options = {}) {
+  return jwt.sign(payload, "stubJWT", {
     expiresIn: "24h",
     ...options
   });
