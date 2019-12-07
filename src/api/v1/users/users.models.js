@@ -16,5 +16,9 @@ export default (sequelize, dataTypes) => {
     user.password = await bcrypt.hash(user.password, 8);
   });
 
+  User.associate = models => {
+    models.User.hasMany(models.Post, { as: "posts", foreignKey: "user_id" });
+  };
+
   return User;
 };

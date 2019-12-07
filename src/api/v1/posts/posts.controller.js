@@ -10,8 +10,10 @@ export default new (class PostsController {
   }
 
   async store(request, h) {
+    const { id: user_id } = request.auth.credentials;
+
     const { payload } = request;
-    const post = await PostsDao.create(payload);
+    const post = await PostsDao.create({ ...payload, user_id });
 
     return h.response(post).code(CREATED);
   }
