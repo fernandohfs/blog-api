@@ -10,7 +10,7 @@ import { Sequelize } from "sequelize";
 import Env from "./environment.config";
 import dbConfig from "./database.config";
 
-class Server {
+export class Server {
   constructor() {
     this.server = Hapi.server({
       host: Env.HOST,
