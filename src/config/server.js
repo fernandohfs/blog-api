@@ -4,6 +4,7 @@ dotEnv.config();
 import Hapi from "@hapi/hapi";
 import HapiRouter from "hapi-router";
 import HapiSequelize from "hapi-sequelizejs";
+import HapiAuthJWT from "hapi-auth-jwt2";
 import { Sequelize } from "sequelize";
 
 import dbConfig from "./database";
@@ -40,8 +41,20 @@ class Server {
         options: {
           routes: "src/api/**/**/**.routes.js"
         }
+      },
+      {
+        plugin: HapiAuthJWT
       }
     ]);
+
+    this.server.auth.strategy("jwt", "jwt", {
+      key: "stubJWT",
+      validate: async (decoded, request, h) => {
+        return { isValid: true };
+      }
+    });
+
+    this.server.auth.default("jwt");
   }
 }
 

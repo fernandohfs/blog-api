@@ -9,5 +9,14 @@ export default [
       validate: Schemas.create
     },
     handler: UsersController.store
+  },
+  {
+    method: "POST",
+    path: "/v1/users/login",
+    config: {
+      auth: false,
+      validate: Schemas.create
+    },
+    handler: UsersController.login
   }
 ];
