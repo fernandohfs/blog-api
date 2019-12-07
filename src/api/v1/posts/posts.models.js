@@ -12,7 +12,7 @@ export default (sequelize, dataTypes) => {
   );
 
   Post.associate = models => {
-    models.Post.hasMany(models.Tag, { as: "tags" });
+    models.Post.hasMany(models.Tag, { as: "tags", foreignKey: "post_id" });
   };
 
   return Post;
