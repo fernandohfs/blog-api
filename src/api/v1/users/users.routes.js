@@ -6,6 +6,7 @@ export default [
     method: "POST",
     path: "/v1/users",
     config: {
+      auth: false,
       validate: Schemas.create
     },
     handler: UsersController.store
