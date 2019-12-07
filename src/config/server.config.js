@@ -7,13 +7,14 @@ import HapiSequelize from "hapi-sequelizejs";
 import HapiAuthJWT from "hapi-auth-jwt2";
 import { Sequelize } from "sequelize";
 
-import dbConfig from "./database";
+import Env from "./environment.config";
+import dbConfig from "./database.config";
 
 class Server {
   constructor() {
     this.server = Hapi.server({
-      host: process.env.HOST,
-      port: process.env.PORT
+      host: Env.HOST,
+      port: Env.PORT
     });
   }
 
@@ -48,7 +49,7 @@ class Server {
     ]);
 
     this.server.auth.strategy("jwt", "jwt", {
-      key: "stubJWT",
+      key: Env.JWT_SECRET,
       validate: async (decoded, request, h) => {
         return { isValid: true };
       }

@@ -4,10 +4,11 @@ import jwt from "jsonwebtoken";
 import { notFound } from "@hapi/boom";
 
 import { getObjectOr404 } from "../utils/database.utils";
+import Env from "../../config/environment.config";
 
 export function getToken(payload, options = {}) {
-  return jwt.sign(payload, "stubJWT", {
-    expiresIn: "24h",
+  return jwt.sign(payload, Env.JWT_SECRET, {
+    expiresIn: Env.JWT_EXPIRES_IN,
     ...options
   });
 }
