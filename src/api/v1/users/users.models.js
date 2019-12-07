@@ -12,10 +12,8 @@ export default (sequelize, dataTypes) => {
     { sequelize, modelName: "User" }
   );
 
-  User.addHook("beforeSave", async user => {
-    if (user.password) {
-      user.password = await bcrypt.hash(user.password, 8);
-    }
+  User.addHook("beforeCreate", async user => {
+    user.password = await bcrypt.hash(user.password, 8);
   });
 
   return User;
