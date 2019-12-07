@@ -54,7 +54,7 @@ class Server {
     await this.server.auth.strategy("jwt", "jwt", {
       key: Env.JWT_SECRET,
       validate: async (decoded, request, h) => {
-        return { isValid: true };
+        return { isValid: true, credentials: decoded };
       }
     });
 
