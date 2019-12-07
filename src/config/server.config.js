@@ -18,9 +18,10 @@ class Server {
     });
   }
 
-  init() {
-    this.server.start();
-    this._plugins();
+  async init() {
+    await this.server.start();
+    await this._plugins();
+    await this._auth();
     console.log(`Server running on ${this.server.info.uri}`);
   }
 
@@ -47,15 +48,17 @@ class Server {
         plugin: HapiAuthJWT
       }
     ]);
+  }
 
-    this.server.auth.strategy("jwt", "jwt", {
+  async _auth() {
+    await this.server.auth.strategy("jwt", "jwt", {
       key: Env.JWT_SECRET,
       validate: async (decoded, request, h) => {
         return { isValid: true };
       }
     });
 
-    this.server.auth.default("jwt");
+    await this.server.auth.default("jwt");
   }
 }
 
